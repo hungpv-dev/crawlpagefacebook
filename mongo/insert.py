@@ -1,4 +1,4 @@
-from mongo.connections import pages
+from mongo.collections import pages
 
 pages.insert_many([
     {

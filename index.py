@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 from facebook.crawl import Crawl
-from mongo.connections import pages
+from mongo.collections import pages
 
 service = Service('chromedriver.exe') # Khởi tạo dịch vụ
 browser = webdriver.Chrome(service=service) # Mở chorm
@@ -27,10 +27,8 @@ listPages = pages.find() #lấy danh sách page
 for page in listPages:
     link = page['link']
     browser.get(link)
-    crawl = Crawl(page)
+    crawl = Crawl(browser,page)
     crawl.get()
     sleep(2)
 
 browser.close() # Đóng
-
-# x9f619 x1n2onr6 x1ja2u2z xeuugli xs83m0k xjl7jj x1xmf6yo x1emribx x1e56ztr x1i64zmx x19h7ccj xu9j1y6 x7ep2pv

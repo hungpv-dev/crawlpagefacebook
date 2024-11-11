@@ -1,6 +1,4 @@
 types = {
-    'post': '//*[@aria-posinset]',
-    'content-post': '//*[@data-ad-comet-preview="message"]',
-    'content-text': '//*[@dir="auto"]',
-    'btn-more' : "//*[text()='Xem thêm']"
+    'modal': '/html/body/div[1]/div/div[1]/div/div[5]/div/div/div[2]/div/div/div/div',
+    'content': '//*[@data-ad-comet-preview="message"]',
 }

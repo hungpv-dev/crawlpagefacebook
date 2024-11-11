@@ -2,57 +2,59 @@
 from facebook.type import types
 from selenium.webdriver.common.by import By
 from time import sleep
-from mongo.collections import posts 
+from mongo.collections import posts as postCollections
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class Crawl:
-    def __init__(self,browser, page):
-        self.page = page
+    def __init__(self,browser):
         self.browser = browser
 
-    def get(self):
+    def get(self, page):
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        sleep(10)
-        
-        try:
-            posts = self.browser.find_elements(By.XPATH, '//*[@aria-posinset]')
-            print(len(posts))
-            for post in posts:
-                # with open('output.txt','a',encoding='utf-8') as file:
-                #     file.write(post.text)
-                #     file.write('\n----------------------------------------------\n')
-                
-                xem_them_buttons = post.find_elements(By.XPATH, types['btn-more'])
-                for button in xem_them_buttons:
-                    try:
-                        button.click()
-                        print(button.text)
-                        sleep(1)
-                    except:
-                        pass
-                self.getData(post)
-        except:
-            print(f"Không tìm thấy bài post nào trên page: {self.page['link']}")
-            pass
+        sleep(5)
 
+        link = f"{page['link']}/posts/"
+        self.link = link
+        self.page_id = page['_id']
 
-    def getData(self, post):
+        post_ids = []
+        posts = self.browser.find_elements(By.XPATH, f"//a[contains(@href, '{link}')]")
+        print(f"*) //a[contains(@href, '{link}')]",len(posts))
+
+        for post in posts:
+            href = post.get_attribute('href')
+            post_id = href.replace(link, '').split('?')[0]
+            if post_id not in post_ids:
+                post_ids.append(post_id)
+
+        print(f"=> Ra được: {len(post_ids)}")
+        self.checkPost(post_ids)
+    
+    def checkPost(self, post_ids):
+        new_posts = [post_id for post_id in post_ids if postCollections.find_one({'_id': post_id}) is None]
+        if new_posts:
+            for post_id in new_posts:
+                self.crawlPost(post_id)
+
+    def crawlPost(self, post_id):
         data = {
-            'title': '',
+            '_id': post_id,
+            'page_id': self.page_id,
+            'title': ''
         }
+        self.browser.get(f"{self.link}{post_id}")
+        sleep(5)
+
+        modal = self.browser.find_element(By.XPATH,types['modal'])
         try:
-            # Lấy content
-            content = WebDriverWait(post, 10).until(
-                EC.presence_of_element_located((By.XPATH, types['content-post']))
-            )
+            content = modal.find_element(By.XPATH,types['content'])
+            data['title'] = content.text
+        except:
+            pass
             
-            texts = content.find_elements(By.XPATH, './div/div/span/div/div')
-            for text in texts:
-                data['title'] += text.text + ' '
+        postCollections.insert_one(data)
 
-        except Exception as e:
-            print(f'Post. Error: {e}')
 
-        posts.insert_one(data)
+    

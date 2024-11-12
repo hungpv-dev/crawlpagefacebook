@@ -23,12 +23,12 @@ browser.get('https://facebook.com')
 
 sleep(1)
 
-crawl = Crawl(browser)
 listPages = pages.find() #lấy danh sách page
 for page in listPages:
     link = page['link']
     browser.get(link)
-    crawl.get(page)
+    crawl = Crawl(browser,page)
+    crawl.get()
     sleep(2)
 
 browser.close() # Đóng

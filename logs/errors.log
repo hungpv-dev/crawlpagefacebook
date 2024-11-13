@@ -1,0 +1,4 @@
+[2024-11-13 17:52:14]: 1062 (23000): Duplicate entry 'pfbid026d86MRooKGj3b8YFFCwS5ZWUKbJMXZxNRXMc2FisgwvFFB2pN4VzkP4oR' for key 'posts.post_id' 
+[2024-11-13 17:52:43]: 1062 (23000): Duplicate entry 'pfbid02UjaSdMfFAEfs1XMZK6S6mP9nkm891GUNB6ExJUmn3MtVbkSxHGXApGaH7' for key 'posts.post_id' 
+[2024-11-13 17:57:11]: 1062 (23000): Duplicate entry 'pfbid026d86MRooKGj3b8YFFCwS5ZWUKbJMXZxNRXMc2FisgwvFFB2pN4VzkP4oR' for key 'posts.post_id' 
+[2024-11-13 18:03:25]: 1062 (23000): Duplicate entry 'pfbid026d86MRooKGj3b8YFFCwS5ZWUKbJMXZxNRXMc2FisgwvFFB2pN4VzkP4oR' for key 'posts.post_id' 

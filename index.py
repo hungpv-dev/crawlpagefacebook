@@ -1,15 +1,14 @@
 from selenium import webdriver
 import json
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 from facebook.crawl import Crawl
-from mongo.collections import pages
+from sql.pages import Page
 
-service = Service('chromedriver.exe') # Khởi tạo dịch vụ
-browser = webdriver.Chrome(service=service) # Mở chorm
+service = Service('chromedriver.exe') 
+browser = webdriver.Chrome(service=service)
 
-browser.get("https://facebook.com") # Chuyển hướng
+browser.get("https://facebook.com")
 
 # Đọc cookie từ file
 with open('cookie.json','r') as file:
@@ -22,8 +21,8 @@ for cookie in cookies:
 browser.get('https://facebook.com')
 
 sleep(1)
-
-listPages = pages.find() #lấy danh sách page
+page_instance = Page()
+listPages = page_instance.all()
 for page in listPages:
     link = page['link']
     browser.get(link)

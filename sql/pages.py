@@ -6,6 +6,12 @@ class Page(Model):
     def __init__(self):
         super().__init__()
         self.table = 'pages'
+        self.filllabel = [
+            'link',
+            'type',
+            'type_page',
+            'updated_at'
+        ]
 
     def insert_from_xlsx(self, file_path):
         df = pd.read_excel(file_path)

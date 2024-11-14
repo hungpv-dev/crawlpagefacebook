@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from time import sleep
 from facebook.crawl import Crawl
 from sql.pages import Page
+from datetime import datetime
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -28,12 +29,21 @@ browser.get('https://facebook.com')
 
 sleep(1)
 page_instance = Page()
-listPages = page_instance.all()
-for page in listPages:
-    link = page['link']
-    browser.get(link)
-    crawl = Crawl(browser,page)
-    crawl.get()
-    sleep(2)
+def crawlPage(page_instance):
+    listPages = page_instance.where('type_page = 1').orderBy('updated_at asc').limit(100).all()
+    for page in listPages:
+        link = page['link']
+        browser.get(link)
+        crawl = Crawl(browser,page)
+        crawl.get()
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        page_id = page['id']
+        page_instance.update({
+            'updated_at': current_time
+        },f'id = {page_id}')
+        sleep(2)
+    crawlPage(page_instance)
+
+crawlPage(page_instance)
 
 browser.close() # Đóng

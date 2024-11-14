@@ -176,22 +176,27 @@ class Crawl:
                     countComment += 1
                     pass
                     
-                    
                 for text in removeComment:
                     textComment = textComment.replace(text,'')
 
+                textComment = textComment.strip()
                 textArray = textComment.split('\n')
 
-                textContentComment = ' '.join(textArray[1:])
+                if 'Fan cứng' in textComment:
+                    user_name = textArray[1]
+                    textContentComment = ' '.join(textArray[2:])
+                else:
+                    user_name = textArray[0]
+                    textContentComment = ' '.join(textArray[1:])
 
-                if textArray[0] == '' or textContentComment == '':
+                if user_name == '' or textContentComment == '':
                     continue
 
                 countComment += 1
                 
                 dataComment.append({
                     'post_id': postLink["id"],
-                    'user_name': textArray[0],
+                    'user_name': user_name,
                     'content': textContentComment
                 })
 

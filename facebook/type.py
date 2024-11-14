@@ -33,6 +33,8 @@ removeComment = [
     'Tác giả\n',
     '  ',
     'Fan cứng\n'
+    'Fan cứng'
+    'Fan cứng\n\n'
     'Theo dõi',
 ]
 

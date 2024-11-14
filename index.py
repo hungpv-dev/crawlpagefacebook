@@ -1,12 +1,18 @@
 from selenium import webdriver
 import json
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 from facebook.crawl import Crawl
 from sql.pages import Page
 
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox") 
+chrome_options.add_argument("--disable-dev-shm-usage")
+
 service = Service('chromedriver.exe') 
-browser = webdriver.Chrome(service=service)
+browser = webdriver.Chrome(service=service,options=chrome_options)
 
 browser.get("https://facebook.com")
 

@@ -104,3 +104,9 @@ class Model:
     def truncate(self):
         sql = f'TRUNCATE TABLE {self.table}'
         self.cursor.execute(sql)
+
+    def random_record(self):
+        query = f"SELECT * FROM {self.table} ORDER BY RAND() LIMIT 1"
+        self.cursor.execute(query)
+        columns = [column[0] for column in self.cursor.description]
+        return dict(zip(columns, self.cursor.fetchone()))

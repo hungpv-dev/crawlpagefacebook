@@ -1,8 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from time import sleep
-from datetime import datetime
+from facebook.push import Push
 import json
+from sql.posts import Post
 
 service = Service('chromedriver.exe')
 browser = webdriver.Chrome(service=service)
@@ -19,15 +20,14 @@ for cookie in cookies:
     browser.add_cookie(cookie)
 
 browser.get('https://facebook.com')
-
 sleep(1)
-# page_instance = Page()
-# listPages = page_instance.all()
-# for page in listPages:
-#     link = page['link']
-#     browser.get(link)
-#     crawl = Crawl(browser,page)
-#     crawl.get()
-#     sleep(2)
+browser.get('https://www.facebook.com/groups/1251316042850404')
+sleep(1)
+
+post_instance = Post()
+record = post_instance.random_record()
+
+push_instance = Push(browser)
+push_instance.up(record)
 
 browser.close() # Đóng

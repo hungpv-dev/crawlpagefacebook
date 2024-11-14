@@ -48,3 +48,9 @@ selectDyamic = {
     'comment': 'bình luận',
     'share': 'lượt chia sẻ'
 }
+
+
+
+push = {
+    'createPost': '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div/div[4]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div'
+}

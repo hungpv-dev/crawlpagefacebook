@@ -35,6 +35,7 @@ class Push:
                 input_element.send_keys(Keys.CONTROL, 'v')
                 sleep(1)
             sleep(5)
+            
             submit_button = self.browser.find_element(By.XPATH, "//div[@aria-label='Đăng']")
             submit_button.click()
         except Exception as e:

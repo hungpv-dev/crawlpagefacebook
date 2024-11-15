@@ -1,4 +1,3 @@
-
 """
     modal = Modal bài viết
     content = Nội dung (chữ) bài viết
@@ -51,6 +50,15 @@ selectDyamic = {
 
 
 
+# Bắt sự kiện vào nút button
 push = {
-    'createPost': '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div/div[4]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div'
+    'createPost': '/html/body/div[1]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div[4]/div/div[2]/div/div/div[2]/div[1]/div/div/div/div[1]/div',
+}
+
+push_an_danh_group = {
+    'createPost': '/html/body/div[1]/div/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div[1]/form/div/div[1]/div/div/div[1]/div/div[2]/div[1]/div[1]/div[1]/div[1]/div/div',
+    'anonymous_post': '/html/body/div[1]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div[4]/div/div[2]/div/div/div[2]/div[1]/div/div/div/div[2]/div/div[1]',
+    'create_anonymous_post': '/html/body/div[1]/div/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div/div[1]/div/div',
+    'add_photo': "//div[@aria-label='Ảnh/video']",
+    'submit_button': '/html/body/div[1]/div/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/div/div[1]/form/div/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/div',
 }
